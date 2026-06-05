@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIE LUXE | Luxury Fragrances</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8D5A3;
+            --gold-shine: #F5E6B8;
+            --gold-dark: #A8872E;
+            --black: #0A0A0A;
+            --black-light: #1A1A1A;
+            --white: #FFFFFF;
+            --off-white: #F8F6F1;
+            --cream: #FAF7F0;
+            --gray: #888888;
+            --gray-light: #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ==================== PRELOADER ==================== */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 99999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 2px;
+            background: var(--black-light);
+            margin-top: 30px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .preloader-bar::after {
+            content: '';
+            display: block;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-shine), var(--gold));
+            animation: preloaderLoad 2s ease-in-out forwards;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes preloaderLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ==================== CURSOR ==================== */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.15s ease, background 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .custom-cursor.hover {
+            transform: scale(2);
+            background: rgba(201, 168, 76, 0.2);
+        }
+
+        .cursor-dot {
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.08s ease;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 9999;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 10px 60px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .nav-logo img {
+            height: 60px;
+            object-fit: contain;
+            transition: height 0.5s ease;
+        }
+
+        .navbar.scrolled .nav-logo img {
+            height: 45px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-shine));
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-search {
+            position: relative;
+        }
+
+        .nav-search input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            padding: 10px 40px 10px 15px;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            border-radius: 0;
+            width: 200px;
+            transition: all 0.4s ease;
+            outline: none;
+        }
+
+        .nav-search input::placeholder {
+            color: var(--gray);
+            letter-spacing: 2px;
+            font-size: 10px;
+        }
+
+        .nav-search input:focus {
+            border-color: var(--gold);
+            background: rgba(201, 168, 76, 0.05);
+            width: 280px;
+        }
+
+        .nav-search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 1.5px;
+            background: var(--gold);
+            transition: all 0.4s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ==================== MOBILE MENU ==================== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            padding: 8px 25px;
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 30px;
+            animation: heroFadeIn 1s ease 0.5s both;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            font-weight: 400;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            animation: heroFadeIn 1s ease 0.8s both;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 50%, var(--white) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gold-light);
+            letter-spacing: 8px;
+            margin-bottom: 50px;
+            animation: heroFadeIn 1s ease 1.1s both;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 18px 60px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: heroFadeIn 1s ease 1.4s both;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transition: left 0.7s ease;
+            opacity: 0.15;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.3);
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: heroFadeIn 1s ease 1.7s both;
+        }
+
+        .hero-scroll span {
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: scaleY(1); opacity: 1; }
+            50% { transform: scaleY(0.5); opacity: 0.3; }
+        }
+
+        /* ==================== SECTION TITLES ==================== */
+        .section-divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 20px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gray);
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* ==================== BOTTLE SHOWCASE ==================== */
+        .bottle-showcase {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, var(--black) 0%, var(--black-light) 50%, var(--black) 100%);
+            position: relative;
+        }
+
+        .bottle-showcase-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .bottle-showcase-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .bottle-showcase-image img {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 30px 60px rgba(201, 168, 76, 0.15));
+            animation: bottleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes bottleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .bottle-showcase-glow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 100px;
+            background: radial-gradient(ellipse, rgba(201, 168, 76, 0.15) 0%, transparent 70%);
+            filter: blur(20px);
+        }
+
+        .bottle-showcase-text {
+            flex: 1;
+        }
+
+        .bottle-showcase-text .section-badge,
+        .bottle-showcase-text .section-title,
+        .bottle-showcase-text .section-subtitle {
+            text-align: left;
+        }
+
+        .bottle-showcase-text .section-divider {
+            margin: 0 0 20px 0;
+        }
+
+        .bottle-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            line-height: 2;
+            color: var(--gray-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .bottle-features {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .bottle-feature {
+            text-align: center;
+        }
+
+        .bottle-feature-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--gold);
+        }
+
+        .bottle-feature-label {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        /* ==================== PRODUCTS SECTION ==================== */
+        .products-section {
+            padding: 100px 40px;
+            background: var(--black);
+            position: relative;
+        }
+
+        .products-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* ==================== CATEGORY TABS ==================== */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 15px 40px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            background: transparent;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .category-tab:hover,
+        .category-tab.active {
+            border-color: var(--gold);
+            color: var(--black);
+        }
+
+        .category-tab:hover::before,
+        .category-tab.active::before {
+            opacity: 1;
+        }
+
+        .category-tab span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-count {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.2);
+            padding: 2px 8px;
+            font-size: 9px;
+            margin-left: 8px;
+            border-radius: 2px;
+        }
+
+        .category-tab.active .category-count {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* ==================== PRODUCT GRID ==================== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(15, 15, 15, 0.9));
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            border-color: rgba(201, 168, 76, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(201, 168, 76, 0.1);
+        }
+
+        .product-card-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: linear-gradient(145deg, #111, #0a0a0a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .product-card-image img {
+            width: 75%;
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            filter: drop-shadow(0 10px 30px rgba(201, 168, 76, 0.1));
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.08);
+        }
+
+        .product-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.6));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover .product-card-overlay {
+            opacity: 1;
+        }
+
+        .product-gender-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            font-size: 8px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            color: var(--gold);
+            background: rgba(10, 10, 10, 0.8);
+        }
+
+        .product-card-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .product-card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+
+        .product-card-inspired {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .product-card-prices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .product-price {
+            text-align: center;
+        }
+
+        .product-price-size {
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .product-price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--gold);
+        }
+
+        .product-price-divider {
+            width: 1px;
+            height: 35px;
+            background: rgba(201, 168, 76, 0.2);
+        }
+
+        .product-card-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: 0;
+        }
+
+        .product-card-btn:hover::before {
+            left: 0;
+        }
+
+        .product-card-btn:hover {
+            color: var(--black);
+        }
+
+        .product-card-btn span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .whatsapp-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ==================== FEEDBACK ==================== */
+        .feedback-section {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, var(--black) 0%, var(--black-light) 50%, var(--black) 100%);
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feedback-card {
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .feedback-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(201, 168, 76, 0.1);
+        }
+
+        .feedback-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .feedback-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .feedback-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            text-align: center;
+        }
+
+        .feedback-label span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-style: italic;
+            color: var(--gold-light);
+            letter-spacing: 3px;
+        }
+
+        /* ==================== FLOATING WHATSAPP ==================== */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9990;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: whatsappPulse 2s ease-in-out infinite;
+            text-decoration: none;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        .floating-whatsapp svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        @keyframes whatsappPulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.7), 0 0 0 10px rgba(37, 211, 102, 0.1); }
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            padding: 80px 60px 40px;
+            background: var(--black);
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: var(--gray);
+            font-style: italic;
+            max-width: 300px;
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            display: block;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 60px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--gray);
+        }
+
+        .footer-bottom span {
+            color: var(--gold);
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 33px;
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--gold);
+            background: rgba(10, 10, 10, 0.9);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 9990;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            font-size: 18px;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* ==================== LOAD MORE ==================== */
+        .load-more-container {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .load-more-btn {
+            display: inline-block;
+            padding: 16px 60px;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .load-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+        }
+
+        .load-more-btn:hover::before {
+            left: 0;
+        }
+
+        .load-more-btn:hover {
+            color: var(--black);
+        }
+
+        .load-more-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== SEARCH RESULTS ==================== */
+        .search-results-info {
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: var(--gold-light);
+            font-style: italic;
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .no-results h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .no-results p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .hero-title { font-size: 60px; letter-spacing: 10px; }
+            .bottle-showcase-inner { flex-direction: column; }
+            .bottle-showcase-text .section-title,
+            .bottle-showcase-text .section-badge,
+            .bottle-showcase-text .section-subtitle { text-align: center; }
+            .bottle-showcase-text .section-divider { margin: 0 auto 20px; }
+            .bottle-features { justify-content: center; }
+        }
+
+        @media (max-width: 992px) {
+            .navbar { padding: 15px 30px; }
+            .nav-links { display: none; }
+            .nav-search { display: none; }
+            .hamburger { display: flex; }
+            .hero-title { font-size: 48px; letter-spacing: 8px; }
+            .hero-subtitle { font-size: 16px; letter-spacing: 5px; }
+            .section-title { font-size: 36px; letter-spacing: 5px; }
+            .feedback-grid { grid-template-columns: 1fr; max-width: 500px; }
+            .feedback-card img { height: 300px; }
+            .products-section { padding: 80px 20px; }
+            .bottle-showcase { padding: 80px 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 36px; letter-spacing: 5px; }
+            .hero-subtitle { font-size: 14px; letter-spacing: 3px; }
+            .hero-cta { padding: 14px 40px; font-size: 10px; }
+            .category-tab { padding: 12px 25px; font-size: 10px; letter-spacing: 2px; }
+            .section-title { font-size: 28px; letter-spacing: 3px; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .product-card-name { font-size: 14px; }
+            .product-price-amount { font-size: 16px; }
+            .footer-content { flex-direction: column; align-items: center; text-align: center; }
+            .footer-brand p { max-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 28px; letter-spacing: 3px; }
+            .products-grid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
+            .category-tabs { gap: 3px; }
+            .category-tab { padding: 10px 15px; font-size: 9px; letter-spacing: 1px; }
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile search */
+        .mobile-search {
+            display: none;
+            padding: 15px 20px;
+            background: rgba(10,10,10,0.95);
+            position: fixed;
+            top: 75px;
+            left: 0;
+            width: 100%;
+            z-index: 9997;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+        }
+
+        .mobile-search.active {
+            display: block;
+        }
+
+        .mobile-search input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(201,168,76,0.3);
+            padding: 12px 15px;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            outline: none;
+        }
+
+        .mobile-search input:focus {
+            border-color: var(--gold);
+        }
+
+        .mobile-search-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .mobile-search-toggle { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <img src="https://i.imgur.com/o0f4Rjt.jpeg" alt="VIE LUXE" class="preloader-logo">
+        <div class="preloader-bar"></div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="https://i.imgur.com/o0f4Rjt.jpeg" alt="VIE LUXE">
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#men">Men</a></li>
+            <li><a href="#women">Women</a></li>
+            <li><a href="#unisex">Unisex</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
+
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="SEARCH SCENT..." oninput="searchProducts()">
+            <span class="nav-search-icon">&#9906;</span>
+        </div>
+
+        <button class="mobile-search-toggle" onclick="toggleMobileSearch()">&#9906;</button>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="toggleMenu()">Home</a>
+        <a href="#collection" onclick="toggleMenu()">Collection</a>
+        <a href="#men" onclick="toggleMenu()">Men</a>
+        <a href="#women" onclick="toggleMenu()">Women</a>
+        <a href="#unisex" onclick="toggleMenu()">Unisex</a>
+        <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+    </div>
+
+    <!-- MOBILE SEARCH -->
+    <div class="mobile-search" id="mobileSearch">
+        <input type="text" id="mobileSearchInput" placeholder="SEARCH YOUR SCENT..." oninput="searchProducts(this.value)">
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Luxury Fragrances</div>
+            <h1 class="hero-title">VIE LUXE</h1>
+            <p class="hero-subtitle">The Art of Scent — Redefined</p>
+            <a href="#collection" class="hero-cta">Discover Collection</a>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- BOTTLE SHOWCASE - MEN -->
+    <section class="bottle-showcase" id="bottle-men">
+        <div class="bottle-showcase-inner">
+            <div class="bottle-showcase-image">
+                <img src="https://i.imgur.com/eN4xgoW.jpeg" alt="VIE LUXE Men's Bottle">
+                <div class="bottle-showcase-glow"></div>
+            </div>
+            <div class="bottle-showcase-text">
+                <div class="section-divider"></div>
+                <span class="section-badge">For Him</span>
+                <h2 class="section-title">The Gentleman's<br>Signature</h2>
+                <p class="bottle-desc">
+                    Crafted with precision, each VIE LUXE fragrance for men captures the essence of timeless masculinity. From fresh citrus to deep woody notes, discover a world of sophistication in every spray.
+                </p>
+                <div class="bottle-features">
+                    <div class="bottle-feature">
+                        <div class="bottle-feature-number">83</div>
+                        <div class="bottle-feature-label">Fragrances</div>
+                    </div>
+                    <div class="bottle-feature">
+                        <div class="bottle-feature-number">24h</div>
+                        <div class="bottle-feature-label">Longevity</div>
+                    </div>
+                    <div class="bottle-feature">
+                        <div class="bottle-feature-number">100%</div>
+                        <div class="bottle-feature-label">Premium Oil</div>
+                    </div>
+                </div>
+                <a href="#men" class="hero-cta">Explore Men's</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTLE SHOWCASE - WOMEN -->
+    <section class="bottle-showcase" id="bottle-women">
+        <div class="bottle-showcase-inner" style="flex-direction: row-reverse;">
+            <div class="bottle-showcase-image">
+                <img src="https://i.imgur.com/5rIyktP.jpeg" alt="VIE LUXE Women's Bottle">
+                <div class="bottle-showcase-glow"></div>
+            </div>
+            <div class="bottle-showcase-text">
+                <div class="section-divider"></div>
+                <span class="section-badge">For Her</span>
+                <h2 class="section-title">The Essence of<br>Elegance</h2>
+                <p class="bottle-desc">
+                    Delicate yet unforgettable. Our women's collection embodies grace, passion, and allure. Every note tells a story of beauty and confidence that lingers in the air.
+                </p>
+                <div class="bottle-features">
+                    <div class="bottle-feature">
+                        <div class="bottle-feature-number">83</div>
+                        <div class="bottle-feature-label">Fragrances</div>
+                    </div>
+                    <div class="bottle-feature">
+                        <div class="bottle-feature-number">24h</div>
+                        <div class="bottle-feature-label">Longevity</div>
+                    </div>
+                    <div class="bottle-feature">
+                        <div class="bottle-feature-number">100%</div>
+                        <div class="bottle-feature-label">Premium Oil</div>
+                    </div>
+                </div>
+                <a href="#women" class="hero-cta">Explore Women's</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLLECTION SECTION -->
+    <section class="products-section" id="collection">
+        <div class="section-header">
+            <div class="section-divider"></div>
+            <span class="section-badge">Our Collection</span>
+            <h2 class="section-title">250 Luxury Scents</h2>
+            <p class="section-subtitle">Inspired by the world's most iconic fragrances</p>
+        </div>
+
+        <div class="category-tabs">
+            <button class="category-tab active" onclick="filterProducts('all')"><span>All <span class="category-count">250</span></span></button>
+            <button class="category-tab" onclick="filterProducts('men')" id="men"><span>Men <span class="category-count">83</span></span></button>
+            <button class="category-tab" onclick="filterProducts('women')" id="women"><span>Women <span class="category-count">83</span></span></button>
+            <button class="category-tab" onclick="filterProducts('unisex')" id="unisex"><span>Unisex <span class="category-count">84</span></span></button>
+        </div>
+
+        <div class="search-results-info" id="searchResultsInfo"></div>
+
+        <div class="products-grid" id="productsGrid"></div>
+
+        <div class="no-results" id="noResults">
+            <h3>No Fragrances Found</h3>
+            <p>Try searching with a different name</p>
+        </div>
+
+        <div class="load-more-container" id="loadMoreContainer">
+            <button class="load-more-btn" onclick="loadMore()"><span>Load More Fragrances</span></button>
+        </div>
+    </section>
+
+    <!-- REVIEWS / FEEDBACK -->
+    <section class="feedback-section" id="reviews">
+        <div class="section-header">
+            <div class="section-divider"></div>
+            <span class="section-badge">Testimonials</span>
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Real reviews from real customers</p>
+        </div>
+        <div class="feedback-grid">
+            <div class="feedback-card reveal">
+                <img src="https://i.imgur.com/oE5YkEC.jpeg" alt="Customer Review 1">
+                <div class="feedback-label"><span>★★★★★ — "Absolutely stunning scent!"</span></div>
+            </div>
+            <div class="feedback-card reveal">
+                <img src="https://i.imgur.com/uKu46S0.jpeg" alt="Customer Review 2">
+                <div class="feedback-label"><span>★★★★★ — "Lasts all day, incredible value"</span></div>
+            </div>
+            <div class="feedback-card reveal">
+                <img src="https://i.imgur.com/zl6qTEl.jpeg" alt="Customer Review 3">
+                <div class="feedback-label"><span>★★★★★ — "Better than the original!"</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://i.imgur.com/o0f4Rjt.jpeg" alt="VIE LUXE">
+                <p>Where luxury meets affordability. Premium fragrances inspired by the world's finest scents.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#collection">Collection</a>
+                <a href="#men">Men</a>
+                <a href="#women">Women</a>
+                <a href="#unisex">Unisex</a>
+            </div>
+            <div class="footer-links">
+                <h4>Pricing</h4>
+                <a href="#">55ml — $10</a>
+                <a href="#">100ml — $15</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <a href="https://wa.me/96176009498" target="_blank">WhatsApp: +961 76 009 498</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 <span>VIE LUXE</span> — All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/96176009498?text=Hello%20VIE%20LUXE!%20I'm%20interested%20in%20your%20fragrances." class="floating-whatsapp" target="_blank">
+        <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.132 6.744 3.054 9.378L1.054 31.2l6.074-1.952a15.93 15.93 0 008.876 2.686C24.826 31.934 32 24.758 32 16.004S24.826 0 16.004 0zm9.308 22.588c-.39 1.098-1.924 2.01-3.148 2.276-0.836.178-1.928.32-5.606-1.204-4.706-1.95-7.728-6.728-7.964-7.04-.226-.312-1.902-2.534-1.902-4.834 0-2.3 1.204-3.432 1.632-3.9.39-.426.914-.574 1.218-.574.152 0 .29.008.414.014.39.018.586.042.844.654.322.762 1.106 2.7 1.204 2.898.098.198.196.462.06.736-.126.282-.236.408-.434.636-.198.228-.386.402-.584.648-.182.212-.386.44-.164.862.222.418.988 1.632 2.122 2.644 1.458 1.302 2.686 1.706 3.068 1.894.382.188.604.16.826-.098.23-.264.978-1.138 1.24-1.53.254-.39.516-.326.862-.196.352.13 2.224 1.05 2.604 1.24.382.196.636.29.728.452.098.162.098.93-.292 2.026z"/></svg>
+    </a>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ==================== PERFUME DATA ====================
+const perfumes = {
+    men: [
+        "Dior Sauvage","Bleu de Chanel","Acqua di Gio","Versace Eros","Dior Homme Intense",
+        "Creed Aventus","Tom Ford Noir Extreme","Paco Rabanne 1 Million","Yves Saint Laurent Y EDP",
+        "Jean Paul Gaultier Le Male","Dolce & Gabbana The One","Giorgio Armani Code",
+        "Valentino Uomo Intense","Hugo Boss Bottled","Chanel Allure Homme Sport",
+        "Versace Dylan Blue","Mont Blanc Explorer","Jimmy Choo Man","Prada Luna Rossa Carbon",
+        "Lacoste L.12.12 Blanc","Ralph Lauren Polo Blue","Calvin Klein Eternity",
+        "Bvlgari Man in Black","Hermès Terre d'Hermès","Givenchy Gentleman",
+        "Issey Miyake L'Eau d'Issey","Azzaro Wanted","Carolina Herrera CH Men",
+        "Narciso Rodriguez For Him","Burberry London","Dunhill Icon","Mancera Cedrat Boisé",
+        "Rasasi Hawas","Montale Intense Café","Parfums de Marly Layton",
+        "Parfums de Marly Pegasus","Initio Oud for Greatness","Xerjoff Naxos",
+        "Amouage Reflection Man","Roja Dove Elysium","Maison Francis Kurkdjian Masculin Pluriel",
+        "Nishane Hacivat","Tom Ford Oud Wood","Tom Ford Tobacco Vanille",
+        "Versace Pour Homme","Prada L'Homme","Armani Stronger With You",
+        "Diesel Only The Brave","Coach For Men","Abercrombie & Fitch Fierce",
+        "Chanel Platinum Égoïste","Davidoff Cool Water","Nautica Voyage",
+        "Azzaro Chrome","Viktor & Rolf Spicebomb","Thierry Mugler A*Men",
+        "Guerlain L'Homme Idéal","Bottega Veneta Pour Homme","Kenzo Homme",
+        "Cartier Déclaration","Bentley For Men Intense","Jaguar Classic Black",
+        "Mercedes Benz Club","Ferrari Black","Antonio Banderas The Secret",
+        "Dolce & Gabbana Light Blue","Ferragamo Uomo","Moschino Toy Boy",
+        "Zadig & Voltaire This Is Him","Loewe 7","Balmain Homme",
+        "Trussardi Uomo","Roberto Cavalli Uomo","Philipp Plein No Limit",
+        "Sean John Unforgivable","John Varvatos Artisan","Kenneth Cole Black Bold",
+        "Paco Rabanne Invictus","Ed Hardy Love & Luck","Perry Ellis 360°",
+        "Guess Seductive","Michael Kors Extreme Blue","Rochas Man"
+    ],
+    women: [
+        "Chanel No. 5","Miss Dior","Lancôme La Vie Est Belle","Yves Saint Laurent Black Opium",
+        "Dolce & Gabbana Light Blue","Gucci Bloom","Marc Jacobs Daisy","Chanel Coco Mademoiselle",
+        "Versace Bright Crystal","Viktor & Rolf Flowerbomb","Carolina Herrera Good Girl",
+        "Prada Candy","Dior J'Adore","Tom Ford Black Orchid","Giorgio Armani Sì",
+        "Narciso Rodriguez For Her","Thierry Mugler Alien","Guerlain Mon Guerlain",
+        "Jo Malone Peony & Blush Suede","Chloé Eau de Parfum","Valentino Donna Born In Roma",
+        "Givenchy L'Interdit","Burberry Her","Jimmy Choo Eau de Parfum",
+        "Elie Saab Le Parfum","Tiffany & Co. Eau de Parfum","Bvlgari Omnia Crystalline",
+        "Calvin Klein Euphoria","Ralph Lauren Romance","Coach Floral",
+        "Michael Kors Gorgeous","Estée Lauder Beautiful","Elizabeth Arden Red Door",
+        "Nina Ricci Nina","Paco Rabanne Lady Million","Hermès Twilly",
+        "Issey Miyake L'Eau d'Issey Femme","Bottega Veneta Eau de Parfum",
+        "Miu Miu L'Eau Bleue","Balenciaga Florabotanica","Loewe Agua",
+        "Salvatore Ferragamo Signorina","Moschino Fresh Couture","Roberto Cavalli Eau de Parfum",
+        "Kenzo Flower","Lacoste Pour Femme","Anna Sui La Nuit de Bohème",
+        "Oscar de la Renta Bella","Vera Wang Princess","Donna Karan Cashmere Mist",
+        "Sarah Jessica Parker Lovely","Britney Spears Fantasy","Jennifer Lopez Glow",
+        "Ariana Grande Cloud","Rihanna Reb'l Fleur","Lady Gaga Fame",
+        "Taylor Swift Wonderstruck","Beyoncé Heat","Paris Hilton Can Can",
+        "Jessica Simpson Fancy","Nicki Minaj Pink Friday","Christina Aguilera Royal Desire",
+        "Shakira Dance","Selena Gomez Eau de Parfum","Kylie Minogue Darling",
+        "Elizabeth Taylor White Diamonds","Celine Dion Signature","Mariah Carey M",
+        "Halle Berry Reveal","Gwen Stefani Harajuku","Kate Spade New York",
+        "Tory Burch Eau de Parfum","Marchesa d'Extase","Guess Girl",
+        "DKNY Be Delicious","Dolce & Gabbana The One for Her","Prada La Femme",
+        "Fendi Fan di Fendi","Trussardi Donna","Maison Margiela Replica Flower Market",
+        "Penhaligon's Luna","Diptyque Do Son","Byredo Gypsy Water",
+        "Le Labo Santal 33","Amouage Honour Woman","Parfums de Marly Delina"
+    ],
+    unisex: [
+        "Tom Ford Oud Wood","Maison Francis Kurkdjian Baccarat Rouge 540",
+        "Creed Aventus","Le Labo Santal 33","Byredo Gypsy Water",
+        "Diptyque Philosykos","Jo Malone Wood Sage & Sea Salt","Escentric Molecules 01",
+        "Maison Margiela Replica Jazz Club","Tom Ford Tobacco Vanille",
+        "Acqua di Parma Colonia","Serge Lutens La Fille de Berlin",
+        "Comme des Garçons Wonderwood","Atelier Cologne Cédrat Enivrant",
+        "Clean Reserve Skin","Juliette Has A Gun Not A Perfume",
+        "Montale Intense Café","Initio Side Effect","Xerjoff Alexandria II",
+        "Amouage Interlude","Tiziana Terenzi Kirke","Nishane Ani",
+        "Parfums de Marly Layton","Kilian Love Don't Be Shy","Memo Paris African Leather",
+        "Roja Dove Enigma","Clive Christian No. 1","Bond No. 9 New York Oud",
+        "Penhaligon's Halfeti","Floris London Honey Oud","Guerlain Santal Royal",
+        "Hermès Un Jardin sur le Nil","Chanel Les Exclusifs Coromandel",
+        "Dior Oud Ispahan","Versace Oud Noir","Bvlgari Le Gemme Tygar",
+        "Valentino Donna Born In Roma Yellow Dream","Givenchy Pi",
+        "Prada Amber","Bottega Veneta Parco Palladiano","Cartier L'Envol",
+        "Dunhill Icon Absolute","Bentley Absolute","Van Cleef & Arpels Collection",
+        "Lalique Encre Noire","Loewe Esencia","Ermenegildo Zegna Indonesian Oud",
+        "Aesop Marrakech Intense","D.S. & Durga Debaser","19-69 Purple Haze",
+        "Frederic Malle Portrait of a Lady","Maison Crivelli Iris Malikhan",
+        "BDK Parfums Gris Charnel","Goldfield & Banks Pacific Rock Moss",
+        "Vilhelm Parfumerie Dear Polly","Imaginary Authors Saint Julep",
+        "Gallivant Istanbul","Hiram Green Dilettante","4160 Tuesdays A Beautiful Mind",
+        "Angela Ciampagna Hatria","Carner Barcelona Tardes","Laboratorio Olfattivo Kashnoir",
+        "Masque Milano Mandala","Ormonde Jayne Osmanthus","Perris Monte Carlo Oud Imperial",
+        "Profumum Roma Acqua Viva","Stephane Humbert Lucas 777 Oud 777",
+        "The Different Company Oud For Love","Xerjoff Richwood","Zoologist Bat",
+        "House of Oud Dates Delight","Juliette Has A Gun Musc Invisible",
+        "Maison Tahité Vani-T","Mancera Roses Vanille","Montale Aoud Leather",
+        "Nasomatto Black Afgano","Nishane Hundred Silent Ways","Orto Parisi Terroni",
+        "Parfums de Marly Godolphin","PDM Sedley","Roja Dove Creation-E",
+        "Serge Lutens Ambre Sultan","Tauer Perfumes L'Air du Désert Marocain",
+        "The House of Oud Breath of the Infinite","Widian London",
+        "Xerjoff 1861 Naxos","Zarko Perfume Cloud Collection","Amouage Jubilation XXV"
+    ]
+};
+
+const WHATSAPP_NUMBER = "96176009498";
+const ITEMS_PER_LOAD = 24;
+let currentCategory = 'all';
+let displayedCount = 0;
+let filteredProducts = [];
+
+function getAllProducts() {
+    let all = [];
+    perfumes.men.forEach((name, i) => {
+        all.push({ name, category: 'men', image: 'https://i.imgur.com/eN4xgoW.jpeg', id: 'm' + i });
+    });
+    perfumes.women.forEach((name, i) => {
+        all.push({ name, category: 'women', image: 'https://i.imgur.com/5rIyktP.jpeg', id: 'w' + i });
+    });
+    perfumes.unisex.forEach((name, i) => {
+        const img = i % 2 === 0 ? 'https://i.imgur.com/eN4xgoW.jpeg' : 'https://i.imgur.com/5rIyktP.jpeg';
+        all.push({ name, category: 'unisex', image: img, id: 'u' + i });
+    });
+    return all;
+}
+
+function createProductCard(product) {
+    const genderLabel = product.category === 'men' ? 'FOR HIM' : product.category === 'women' ? 'FOR HER' : 'UNISEX';
+    const waMsg = encodeURIComponent(`Hello VIE LUXE! I'm interested in "${product.name}" perfume. Could you give me more details?`);
+    const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+    return `
+        <div class="product-card" data-category="${product.category}" data-name="${product.name.toLowerCase()}">
+            <div class="product-card-image">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                <div class="product-card-overlay"></div>
+                <div class="product-gender-tag">${genderLabel}</div>
+            </div>
+            <div class="product-card-info">
+                <h3 class="product-card-name">${product.name}</h3>
+                <p class="product-card-inspired">Inspired Edition</p>
+                <div class="product-card-prices">
+                    <div class="product-price">
+                        <span class="product-price-size">55ml</span>
+                        <span class="product-price-amount">$10</span>
+                    </div>
+                    <div class="product-price-divider"></div>
+                    <div class="product-price">
+                        <span class="product-price-size">100ml</span>
+                        <span class="product-price-amount">$15</span>
+                    </div>
+                </div>
+                <a href="${waLink}" target="_blank" class="product-card-btn">
+                    <span>
+                        <svg class="whatsapp-icon" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.132 6.744 3.054 9.378L1.054 31.2l6.074-1.952a15.93 15.93 0 008.876 2.686C24.826 31.934 32 24.758 32 16.004S24.826 0 16.004 0zm9.308 22.588c-.39 1.098-1.924 2.01-3.148 2.276-.836.178-1.928.32-5.606-1.204-4.706-1.95-7.728-6.728-7.964-7.04-.226-.312-1.902-2.534-1.902-4.834 0-2.3 1.204-3.432 1.632-3.9.39-.426.914-.574 1.218-.574.152 0 .29.008.414.014.39.018.586.042.844.654.322.762 1.106 2.7 1.204 2.898.098.198.196.462.06.736-.126.282-.236.408-.434.636-.198.228-.386.402-.584.648-.182.212-.386.44-.164.862.222.418.988 1.632 2.122 2.644 1.458 1.302 2.686 1.706 3.068 1.894.382.188.604.16.826-.098.23-.264.978-1.138 1.24-1.53.254-.39.516-.326.862-.196.352.13 2.224 1.05 2.604 1.24.382.196.636.29.728.452.098.162.098.93-.292 2.026z"/></svg>
+                        Order via WhatsApp
+                    </span>
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+function renderProducts(products, count) {
+    const grid = document.getElementById('productsGrid');
+    const toShow = products.slice(0, count);
+    grid.innerHTML = toShow.map(createProductCard).join('');
+
+    // Animate cards
+    setTimeout(() => {
+        document.querySelectorAll('.product-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('visible'), i * 50);
+        });
+    }, 100);
+
+    // Load more visibility
+    const loadMoreContainer = document.getElementById('loadMoreContainer');
+    if (count >= products.length) {
+        loadMoreContainer.style.display = 'none';
+    } else {
+        loadMoreContainer.style.display = 'block';
+    }
+}
+
+function filterProducts(category) {
+    currentCategory = category;
+    displayedCount = ITEMS_PER_LOAD;
+
+    // Update tabs
+    document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+    event.target.closest('.category-tab').classList.add('active');
+
+    const all = getAllProducts();
+    filteredProducts = category === 'all' ? all : all.filter(p => p.category === category);
+
+    // Clear search
+    document.getElementById('searchInput').value = '';
+    const mobileInput = document.getElementById('mobileSearchInput');
+    if (mobileInput) mobileInput.value = '';
+    document.getElementById('searchResultsInfo').style.display = 'none';
+    document.getElementById('noResults').style.display = 'none';
+
+    renderProducts(filteredProducts, displayedCount);
+
+    // Scroll to products
+    document.getElementById('collection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function loadMore() {
+    displayedCount += ITEMS_PER_LOAD;
+    renderProducts(filteredProducts, displayedCount);
+}
+
+function searchProducts(mobileValue) {
+    const desktopInput = document.getElementById('searchInput');
+    const mobileInput = document.getElementById('mobileSearchInput');
+    const query = (mobileValue !== undefined ? mobileValue : desktopInput.value).toLowerCase().trim();
+
+    // Sync inputs
+    if (mobileValue !== undefined) {
+        desktopInput.value = mobileValue;
+    } else {
+        if (mobileInput) mobileInput.value = desktopInput.value;
+    }
+
+    const all = getAllProducts();
+    const info = document.getElementById('searchResultsInfo');
+    const noResults = document.getElementById('noResults');
+
+    if (query === '') {
+        filteredProducts = currentCategory === 'all' ? all : all.filter(p => p.category === currentCategory);
+        info.style.display = 'none';
+        noResults.style.display = 'none';
+    } else {
+        filteredProducts = all.filter(p => p.name.toLowerCase().includes(query));
+        info.style.display = 'block';
+        info.textContent = `Found ${filteredProducts.length} fragrance${filteredProducts.length !== 1 ? 's' : ''} for "${query}"`;
+
+        if (filteredProducts.length === 0) {
+            noResults.style.display = 'block';
+        } else {
+            noResults.style.display = 'none';
+        }
+
+        // Reset active tab to all
+        document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelector('.category-tab').classList.add('active');
+        currentCategory = 'all';
+    }
+
+    displayedCount = ITEMS_PER_LOAD;
+    renderProducts(filteredProducts, displayedCount);
+}
+
+// ==================== INIT ====================
+function init() {
+    filteredProducts = getAllProducts();
+    displayedCount = ITEMS_PER_LOAD;
+    renderProducts(filteredProducts, displayedCount);
+
+    // Particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// ==================== PRELOADER ====================
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 2200);
+    init();
+});
+
+// ==================== NAVBAR SCROLL ====================
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+
+    if (window.scrollY > 80) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+
+    if (window.scrollY > 600) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+
+    // Reveal animations
+    document.querySelectorAll('.reveal').forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) {
+            el.classList.add('revealed');
+        }
+    });
+});
+
+// ==================== CUSTOM CURSOR ====================
+document.addEventListener('mousemove', (e) => {
+    const cursor = document.getElementById('cursor');
+    const dot = document.getElementById('cursorDot');
+    cursor.style.left = e.clientX - 10 + 'px';
+    cursor.style.top = e.clientY - 10 + 'px';
+    dot.style.left = e.clientX - 2.5 + 'px';
+    dot.style.top = e.clientY - 2.5 + 'px';
+});
+
+document.querySelectorAll('a, button, .product-card, .category-tab').forEach(el => {
+    el.addEventListener('mouseenter', () => document.getElementById('cursor').classList.add('hover'));
+    el.addEventListener('mouseleave', () => document.getElementById('cursor').classList.remove('hover'));
+});
+
+// ==================== MOBILE MENU ====================
+function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('active');
+    document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('active') ? 'hidden' : '';
+}
+
+function toggleMobileSearch() {
+    document.getElementById('mobileSearch').classList.toggle('active');
+}
+
+// ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+</script>
+
+</body>
+</html>
