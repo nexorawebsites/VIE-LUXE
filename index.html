@@ -1246,7 +1246,7 @@
 
     <!-- PRELOADER -->
     <div class="preloader" id="preloader">
-        <img src="https://i.imgur.com/o0f4Rjt.jpeg" alt="VIE LUXE" class="preloader-logo">
+        <img src="https://i.imgur.com/M1Pm06w.jpeg" alt="VIE LUXE" class="preloader-logo">
         <div class="preloader-bar"></div>
     </div>
 
@@ -1257,7 +1257,7 @@
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-logo">
-            <img src="https://i.imgur.com/o0f4Rjt.jpeg" alt="VIE LUXE">
+            <img src="https://i.imgur.com/M1Pm06w.jpeg" alt="VIE LUXE">
         </a>
 
         <ul class="nav-links">
@@ -1438,7 +1438,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <img src="https://i.imgur.com/o0f4Rjt.jpeg" alt="VIE LUXE">
+                <img src="https://i.imgur.com/M1Pm06w.jpeg" alt="VIE LUXE">
                 <p>Where luxury meets affordability. Premium fragrances inspired by the world's finest scents.</p>
             </div>
             <div class="footer-links">
@@ -1466,7 +1466,7 @@
 
     <!-- FLOATING WHATSAPP -->
     <a href="https://wa.me/96176009498?text=Hello%20VIE%20LUXE!%20I'm%20interested%20in%20your%20fragrances." class="floating-whatsapp" target="_blank">
-        <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.132 6.744 3.054 9.378L1.054 31.2l6.074-1.952a15.93 15.93 0 008.876 2.686C24.826 31.934 32 24.758 32 16.004S24.826 0 16.004 0zm9.308 22.588c-.39 1.098-1.924 2.01-3.148 2.276-0.836.178-1.928.32-5.606-1.204-4.706-1.95-7.728-6.728-7.964-7.04-.226-.312-1.902-2.534-1.902-4.834 0-2.3 1.204-3.432 1.632-3.9.39-.426.914-.574 1.218-.574.152 0 .29.008.414.014.39.018.586.042.844.654.322.762 1.106 2.7 1.204 2.898.098.198.196.462.06.736-.126.282-.236.408-.434.636-.198.228-.386.402-.584.648-.182.212-.386.44-.164.862.222.418.988 1.632 2.122 2.644 1.458 1.302 2.686 1.706 3.068 1.894.382.188.604.16.826-.098.23-.264.978-1.138 1.24-1.53.254-.39.516-.326.862-.196.352.13 2.224 1.05 2.604 1.24.382.196.636.29.728.452.098.162.098.93-.292 2.026z"/></svg>
+        <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.132 6.744 3.054 9.378L1.054 31.2l6.074-1.952a15.93 15.93 0 008.876 2.686C24.826 31.934 32 24.758 32 16.004S24.826 0 16.004 0zm9.308 22.588c-.39 1.098-1.924 2.01-3.148 2.276-.836.178-1.928.32-5.606-1.204-4.706-1.95-7.728-6.728-7.964-7.04-.226-.312-1.902-2.534-1.902-4.834 0-2.3 1.204-3.432 1.632-3.9.39-.426.914-.574 1.218-.574.152 0 .29.008.414.014.39.018.586.042.844.654.322.762 1.106 2.7 1.204 2.898.098.198.196.462.06.736-.126.282-.236.408-.434.636-.198.228-.386.402-.584.648-.182.212-.386.44-.164.862.222.418.988 1.632 2.122 2.644 1.458 1.302 2.686 1.706 3.068 1.894.382.188.604.16.826-.098.23-.264.978-1.138 1.24-1.53.254-.39.516-.326.862-.196.352.13 2.224 1.05 2.604 1.24.382.196.636.29.728.452.098.162.098.93-.292 2.026z"/></svg>
     </a>
 
     <!-- BACK TO TOP -->
@@ -1634,14 +1634,12 @@ function renderProducts(products, count) {
     const toShow = products.slice(0, count);
     grid.innerHTML = toShow.map(createProductCard).join('');
 
-    // Animate cards
     setTimeout(() => {
         document.querySelectorAll('.product-card').forEach((card, i) => {
             setTimeout(() => card.classList.add('visible'), i * 50);
         });
     }, 100);
 
-    // Load more visibility
     const loadMoreContainer = document.getElementById('loadMoreContainer');
     if (count >= products.length) {
         loadMoreContainer.style.display = 'none';
@@ -1654,14 +1652,12 @@ function filterProducts(category) {
     currentCategory = category;
     displayedCount = ITEMS_PER_LOAD;
 
-    // Update tabs
     document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
     event.target.closest('.category-tab').classList.add('active');
 
     const all = getAllProducts();
     filteredProducts = category === 'all' ? all : all.filter(p => p.category === category);
 
-    // Clear search
     document.getElementById('searchInput').value = '';
     const mobileInput = document.getElementById('mobileSearchInput');
     if (mobileInput) mobileInput.value = '';
@@ -1670,7 +1666,6 @@ function filterProducts(category) {
 
     renderProducts(filteredProducts, displayedCount);
 
-    // Scroll to products
     document.getElementById('collection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -1684,7 +1679,6 @@ function searchProducts(mobileValue) {
     const mobileInput = document.getElementById('mobileSearchInput');
     const query = (mobileValue !== undefined ? mobileValue : desktopInput.value).toLowerCase().trim();
 
-    // Sync inputs
     if (mobileValue !== undefined) {
         desktopInput.value = mobileValue;
     } else {
@@ -1710,7 +1704,6 @@ function searchProducts(mobileValue) {
             noResults.style.display = 'none';
         }
 
-        // Reset active tab to all
         document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
         document.querySelector('.category-tab').classList.add('active');
         currentCategory = 'all';
@@ -1726,7 +1719,6 @@ function init() {
     displayedCount = ITEMS_PER_LOAD;
     renderProducts(filteredProducts, displayedCount);
 
-    // Particles
     const particlesContainer = document.getElementById('particles');
     for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
@@ -1763,7 +1755,6 @@ window.addEventListener('scroll', () => {
         backToTop.classList.remove('visible');
     }
 
-    // Reveal animations
     document.querySelectorAll('.reveal').forEach(el => {
         const top = el.getBoundingClientRect().top;
         if (top < window.innerHeight - 100) {
@@ -1798,7 +1789,7 @@ function toggleMobileSearch() {
     document.getElementById('mobileSearch').classList.toggle('active');
 }
 
-// ==================== SMOOTH SCROLL FOR ANCHOR LINKS ====================
+// ==================== SMOOTH SCROLL ====================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
