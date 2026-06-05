@@ -110,7 +110,7 @@
             100% { width: 100%; }
         }
 
-        /* ==================== CURSOR (Desktop only) ==================== */
+        /* ==================== CURSOR ==================== */
         .custom-cursor, .cursor-dot {
             display: none;
         }
@@ -192,7 +192,7 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 35px;
+            gap: 32px;
             list-style: none;
         }
 
@@ -1008,6 +1008,261 @@
             letter-spacing: 2px;
         }
 
+        /* ==================== LOCATION SECTION ==================== */
+        .location-section {
+            padding: 100px 30px;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .location-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .location-card {
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.95), rgba(15, 15, 15, 0.95));
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            padding: 50px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), transparent);
+        }
+
+        .location-icon-big {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            animation: pinPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pinPulse {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 0 15px rgba(201, 168, 76, 0);
+            }
+        }
+
+        .location-icon-big svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--gold);
+        }
+
+        .location-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 3.5vw, 32px);
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .location-card .location-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 17px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .location-address {
+            margin-bottom: 30px;
+        }
+
+        .location-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .location-line:last-child {
+            border-bottom: none;
+        }
+
+        .location-line-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .location-line-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold);
+        }
+
+        .location-line-text {
+            flex: 1;
+        }
+
+        .location-line-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
+        .location-line-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 17px;
+            color: var(--white);
+            line-height: 1.5;
+            direction: ltr;
+        }
+
+        .location-line-value.arabic {
+            font-family: 'Cormorant Garamond', serif;
+            direction: rtl;
+            text-align: right;
+        }
+
+        .location-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .location-btn {
+            flex: 1;
+            min-width: 140px;
+            padding: 14px 20px;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+        }
+
+        .location-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: 0;
+        }
+
+        .location-btn:hover::before {
+            left: 0;
+        }
+
+        .location-btn:hover {
+            color: var(--black);
+        }
+
+        .location-btn span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .location-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .location-map {
+            position: relative;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            overflow: hidden;
+            height: 100%;
+            min-height: 450px;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(40%) brightness(0.85) contrast(1.1);
+            transition: filter 0.5s ease;
+        }
+
+        .location-map:hover iframe {
+            filter: grayscale(0%) brightness(1) contrast(1);
+        }
+
+        .location-map-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--gold);
+            padding: 10px 18px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .location-map-overlay span {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
         /* ==================== FLOATING WHATSAPP ==================== */
         .floating-whatsapp {
             position: fixed;
@@ -1054,7 +1309,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1.3fr;
             gap: 40px;
             align-items: start;
         }
@@ -1096,6 +1351,42 @@
 
         .footer-links a:hover {
             color: var(--gold);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+            color: var(--gray);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer-contact-item svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--gold);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .footer-contact-item a {
+            color: var(--gray);
+            text-decoration: none;
+            margin: 0;
+            display: inline;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--gold);
+        }
+
+        .footer-contact-item .arabic-text {
+            direction: rtl;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
         }
 
         .footer-bottom {
@@ -1291,9 +1582,7 @@
             transform: translateY(0);
         }
 
-        /* ==================== RESPONSIVE DESIGN ==================== */
-
-        /* Tablets - Large */
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 1200px) {
             .bottle-showcase-inner { 
                 flex-direction: column; 
@@ -1321,7 +1610,6 @@
             }
         }
 
-        /* Tablets */
         @media (max-width: 992px) {
             .navbar { 
                 padding: 12px 25px; 
@@ -1362,9 +1650,16 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            .location-container {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            .location-map {
+                min-height: 350px;
+                order: -1;
+            }
         }
 
-        /* Mobile Large */
         @media (max-width: 768px) {
             .navbar {
                 padding: 10px 18px;
@@ -1461,6 +1756,33 @@
             .feedback-card img {
                 height: 280px;
             }
+            .location-section {
+                padding: 70px 20px;
+            }
+            .location-card {
+                padding: 35px 25px;
+            }
+            .location-icon-big {
+                width: 60px;
+                height: 60px;
+            }
+            .location-icon-big svg {
+                width: 28px;
+                height: 28px;
+            }
+            .location-line-value {
+                font-size: 16px;
+            }
+            .location-map {
+                min-height: 300px;
+            }
+            .location-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .location-btn {
+                width: 100%;
+            }
             .footer {
                 padding: 50px 20px 25px;
             }
@@ -1471,6 +1793,10 @@
             }
             .footer-brand {
                 grid-column: 1;
+            }
+            .footer-contact-item {
+                justify-content: center;
+                text-align: left;
             }
             .floating-whatsapp {
                 width: 55px;
@@ -1493,7 +1819,6 @@
             }
         }
 
-        /* Mobile Small */
         @media (max-width: 480px) {
             .navbar {
                 padding: 10px 15px;
@@ -1644,6 +1969,44 @@
                 font-size: 13px;
                 letter-spacing: 1.5px;
             }
+            .location-section {
+                padding: 55px 15px;
+            }
+            .location-card {
+                padding: 30px 20px;
+            }
+            .location-icon-big {
+                width: 55px;
+                height: 55px;
+                margin-bottom: 20px;
+            }
+            .location-icon-big svg {
+                width: 26px;
+                height: 26px;
+            }
+            .location-line {
+                gap: 12px;
+                margin-bottom: 14px;
+                padding-bottom: 14px;
+            }
+            .location-line-icon {
+                width: 32px;
+                height: 32px;
+            }
+            .location-line-value {
+                font-size: 15px;
+            }
+            .location-line-value.arabic {
+                font-size: 16px;
+            }
+            .location-map {
+                min-height: 260px;
+            }
+            .location-btn {
+                font-size: 9.5px;
+                letter-spacing: 2px;
+                padding: 13px 15px;
+            }
             .footer {
                 padding: 45px 18px 20px;
             }
@@ -1657,6 +2020,9 @@
                 font-size: 14px;
             }
             .footer-links a {
+                font-size: 12px;
+            }
+            .footer-contact-item {
                 font-size: 12px;
             }
             .footer-bottom {
@@ -1703,7 +2069,6 @@
             }
         }
 
-        /* Extra Small Mobile */
         @media (max-width: 360px) {
             .hero-badge {
                 font-size: 7.5px;
@@ -1727,7 +2092,6 @@
             }
         }
 
-        /* Landscape Mobile */
         @media (max-height: 500px) and (orientation: landscape) {
             .hero {
                 min-height: auto;
@@ -1763,6 +2127,7 @@
             <li><a href="#bottle-men">Men</a></li>
             <li><a href="#bottle-women">Women</a></li>
             <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#location">Visit Us</a></li>
         </ul>
 
         <div class="nav-right">
@@ -1788,6 +2153,7 @@
         <a href="#bottle-men" onclick="toggleMenu()">Men</a>
         <a href="#bottle-women" onclick="toggleMenu()">Women</a>
         <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+        <a href="#location" onclick="toggleMenu()">Visit Us</a>
     </div>
 
     <!-- MOBILE SEARCH -->
@@ -1931,6 +2297,85 @@
         </div>
     </section>
 
+    <!-- LOCATION SECTION -->
+    <section class="location-section" id="location">
+        <div class="section-header">
+            <div class="section-divider"></div>
+            <span class="section-badge">Visit Our Boutique</span>
+            <h2 class="section-title">Find Us</h2>
+            <p class="section-subtitle">Experience luxury in person at our flagship location</p>
+        </div>
+
+        <div class="location-container">
+            <div class="location-card">
+                <div class="location-icon-big">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <h3>Our Boutique</h3>
+                <p class="location-subtitle">Where elegance meets artistry</p>
+
+                <div class="location-address">
+                    <div class="location-line">
+                        <div class="location-line-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        </div>
+                        <div class="location-line-text">
+                            <div class="location-line-label">City</div>
+                            <div class="location-line-value">Ksara, Zahle, Lebanon</div>
+                        </div>
+                    </div>
+
+                    <div class="location-line">
+                        <div class="location-line-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </div>
+                        <div class="location-line-text">
+                            <div class="location-line-label">Street</div>
+                            <div class="location-line-value arabic">شارع تعليم السواقة</div>
+                        </div>
+                    </div>
+
+                    <div class="location-line">
+                        <div class="location-line-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                        </div>
+                        <div class="location-line-text">
+                            <div class="location-line-label">Phone</div>
+                            <div class="location-line-value">+961 76 009 498</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-buttons">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Ksara+Zahle+Lebanon+شارع+تعليم+السواقة" target="_blank" class="location-btn">
+                        <span>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            Get Directions
+                        </span>
+                    </a>
+                    <a href="https://wa.me/96176009498?text=Hello%20VIE%20LUXE!%20I%20want%20to%20visit%20your%20store." target="_blank" class="location-btn">
+                        <span>
+                            <svg viewBox="0 0 32 32"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.502 1.132 6.744 3.054 9.378L1.054 31.2l6.074-1.952a15.93 15.93 0 008.876 2.686C24.826 31.934 32 24.758 32 16.004S24.826 0 16.004 0zm9.308 22.588c-.39 1.098-1.924 2.01-3.148 2.276-.836.178-1.928.32-5.606-1.204-4.706-1.95-7.728-6.728-7.964-7.04-.226-.312-1.902-2.534-1.902-4.834 0-2.3 1.204-3.432 1.632-3.9.39-.426.914-.574 1.218-.574.152 0 .29.008.414.014.39.018.586.042.844.654.322.762 1.106 2.7 1.204 2.898.098.198.196.462.06.736-.126.282-.236.408-.434.636-.198.228-.386.402-.584.648-.182.212-.386.44-.164.862.222.418.988 1.632 2.122 2.644 1.458 1.302 2.686 1.706 3.068 1.894.382.188.604.16.826-.098.23-.264.978-1.138 1.24-1.53.254-.39.516-.326.862-.196.352.13 2.224 1.05 2.604 1.24.382.196.636.29.728.452.098.162.098.93-.292 2.026z"/></svg>
+                            Contact Us
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="location-map">
+                <div class="location-map-overlay">
+                    <span>📍 Ksara, Zahle</span>
+                </div>
+                <iframe 
+                    src="https://www.google.com/maps?q=Ksara,Zahle,Lebanon&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
@@ -1944,6 +2389,7 @@
                 <a href="#collection">Collection</a>
                 <a href="#bottle-men">Men</a>
                 <a href="#bottle-women">Women</a>
+                <a href="#location">Visit Us</a>
             </div>
             <div class="footer-links">
                 <h4>Pricing</h4>
@@ -1951,8 +2397,15 @@
                 <a href="#">100ml — $15</a>
             </div>
             <div class="footer-links">
-                <h4>Contact</h4>
-                <a href="https://wa.me/96176009498" target="_blank">+961 76 009 498</a>
+                <h4>Contact & Location</h4>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Ksara, Zahle<br><span class="arabic-text">شارع تعليم السواقة</span></span>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                    <a href="https://wa.me/96176009498" target="_blank">+961 76 009 498</a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1969,7 +2422,6 @@
     <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <script>
-// ==================== PERFUME DATA ====================
 const perfumes = {
     men: [
         "Dior Sauvage","Bleu de Chanel","Acqua di Gio","Versace Eros","Dior Homme Intense",
@@ -2216,7 +2668,6 @@ function searchProducts(mobileValue) {
     renderProducts(filteredProducts, displayedCount);
 }
 
-// ==================== INIT ====================
 function init() {
     filteredProducts = getAllProducts();
     displayedCount = ITEMS_PER_LOAD;
@@ -2234,7 +2685,6 @@ function init() {
     }
 }
 
-// ==================== PRELOADER ====================
 window.addEventListener('load', () => {
     setTimeout(() => {
         document.getElementById('preloader').classList.add('hidden');
@@ -2242,7 +2692,6 @@ window.addEventListener('load', () => {
     init();
 });
 
-// ==================== NAVBAR SCROLL ====================
 window.addEventListener('scroll', () => {
     const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('backToTop');
@@ -2267,7 +2716,6 @@ window.addEventListener('scroll', () => {
     });
 }, { passive: true });
 
-// ==================== CUSTOM CURSOR (Desktop only) ====================
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.addEventListener('mousemove', (e) => {
         const cursor = document.getElementById('cursor');
@@ -2294,7 +2742,6 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     }, 3000);
 }
 
-// ==================== MOBILE MENU ====================
 function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('active');
     document.getElementById('mobileMenu').classList.toggle('active');
@@ -2309,7 +2756,6 @@ function toggleMobileSearch() {
     }
 }
 
-// ==================== SMOOTH SCROLL ====================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -2324,7 +2770,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ==================== PREVENT HORIZONTAL SCROLL ====================
 window.addEventListener('resize', () => {
     document.body.style.width = '100%';
 }, { passive: true });
